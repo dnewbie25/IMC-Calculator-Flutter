@@ -12,7 +12,13 @@ class NumberSelector extends StatefulWidget {
 }
 
 class _NumberSelectorState extends State<NumberSelector> {
+  late double _currentValue;
   @override
+  void initState() {
+    super.initState();
+    _currentValue = widget.value;
+  }
+
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(8),
@@ -29,7 +35,7 @@ class _NumberSelectorState extends State<NumberSelector> {
               style: TextStyle(color: AppColors.backgroundComponentSelected),
             ),
             Text(
-              widget.value.toStringAsFixed(0),
+              _currentValue.toStringAsFixed(0),
               style: TextStyle(fontSize: 36, color: Colors.white),
             ),
             Row(
@@ -37,26 +43,44 @@ class _NumberSelectorState extends State<NumberSelector> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: AppColors.primary,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (_currentValue < 500) {
+                          _currentValue = _currentValue + 1;
+                        }
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: AppColors.primary,
+                      ),
+                      child: Icon(Icons.add, size: 36),
                     ),
-                    child: Icon(Icons.add, size: 36,),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: AppColors.primary,
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        if (_currentValue > 0) {
+                          _currentValue = _currentValue - 1;
+                        }
+                      });
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: AppColors.primary,
+                      ),
+                      child: Icon(Icons.remove, size: 36),
                     ),
-                    child: Icon(Icons.remove, size: 36,),
                   ),
                 ),
               ],
-            )
+            ),
           ],
         ),
       ),
