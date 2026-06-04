@@ -8,7 +8,7 @@ class TextStyles {
   }
 }
 
-selectColors(String? isSelected, String? gender) {
+Color selectColors(String? isSelected, String? gender) {
   if (isSelected == "HOMBRE" && gender == "HOMBRE") {
     return AppColors.backgroundComponent;
   } else if (isSelected == "HOMBRE" && gender == "MUJER") {
@@ -18,4 +18,5 @@ selectColors(String? isSelected, String? gender) {
   } else if (isSelected == "MUJER" && gender == "HOMBRE") {
     return AppColors.backgroundComponentSelected;
   }
+  return AppColors.backgroundComponent;
 }

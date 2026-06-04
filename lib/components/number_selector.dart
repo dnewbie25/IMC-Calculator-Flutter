@@ -4,8 +4,9 @@ import 'package:imc_calculator/core/app_colors.dart';
 class NumberSelector extends StatefulWidget {
   final String title;
   final double value;
+  final Function() onIncrement;
 
-  const NumberSelector({super.key, required this.title, required this.value});
+  const NumberSelector({super.key, required this.title, required this.value, required this.onIncrement});
 
   @override
   State<NumberSelector> createState() => _NumberSelectorState();
@@ -18,7 +19,7 @@ class _NumberSelectorState extends State<NumberSelector> {
     super.initState();
     _currentValue = widget.value;
   }
-
+  @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(8),
@@ -45,6 +46,7 @@ class _NumberSelectorState extends State<NumberSelector> {
                   padding: const EdgeInsets.only(right: 8),
                   child: GestureDetector(
                     onTap: () {
+                      widget.onIncrement();
                       setState(() {
                         if (_currentValue < 500) {
                           _currentValue = _currentValue + 1;
@@ -64,6 +66,7 @@ class _NumberSelectorState extends State<NumberSelector> {
                   padding: const EdgeInsets.only(left: 8),
                   child: GestureDetector(
                     onTap: () {
+                      widget.onIncrement();
                       setState(() {
                         if (_currentValue > 0) {
                           _currentValue = _currentValue - 1;
