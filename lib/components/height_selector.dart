@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:imc_calculator/core/app_colors.dart';
 
 class HeightSelector extends StatefulWidget {
-  const HeightSelector({super.key});
+  final ValueChanged<double?> onChanged;
+  const HeightSelector({super.key, required this.onChanged});
 
   @override
   State<HeightSelector> createState() => _HeightSelectorState();
@@ -47,6 +48,7 @@ class _HeightSelectorState extends State<HeightSelector> {
                 setState(() {
                   alturaInicial = newValue;
                 });
+                widget.onChanged(alturaInicial);
               },
             ),
           ],

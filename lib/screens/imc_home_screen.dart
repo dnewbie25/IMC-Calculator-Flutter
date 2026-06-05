@@ -14,13 +14,26 @@ class ImcHomeScreen extends StatefulWidget {
 class _ImcHomeScreenState extends State<ImcHomeScreen> {
   int selectedAge = 20;
   int selectedWeight = 80;
-
+  String? gender;
+  double? altura;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        GenderSelector(),
-        HeightSelector(),
+        GenderSelector(
+          onChanged: (value){
+            setState(() {
+              gender = value;
+            });
+          },
+        ),
+        HeightSelector(
+          onChanged: (value){
+            setState(() {
+              altura = value;
+            });
+          },
+        ),
         SizedBox(
           width: double.infinity,
           child: Padding(
@@ -37,6 +50,11 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
                         selectedWeight++;
                       });
                     },
+                    onDecrease: () {
+                      setState(() {
+                        selectedWeight--;
+                      });
+                    },
                   ),
                 ),
                 Expanded(
@@ -48,6 +66,11 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
                         selectedAge++;
                       });
                     },
+                    onDecrease: () {
+                      setState(() {
+                        selectedAge--;
+                      });
+                    }
                   ),
                 ),
               ],
@@ -64,10 +87,13 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // print("holaaa");
+                  print("$altura, $gender, $selectedAge, $selectedWeight");
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(AppColors.primary),
+                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8)
+                  ))
                 ),
                 child: Text(
                   "Calcular",

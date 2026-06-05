@@ -5,15 +5,16 @@ class NumberSelector extends StatefulWidget {
   final String title;
   final double value;
   final Function() onIncrement;
+   final Function() onDecrease;
 
-  const NumberSelector({super.key, required this.title, required this.value, required this.onIncrement});
+  const NumberSelector({super.key, required this.title, required this.value, required this.onIncrement, required this.onDecrease});
 
   @override
   State<NumberSelector> createState() => _NumberSelectorState();
 }
 
 class _NumberSelectorState extends State<NumberSelector> {
-  late double _currentValue;
+  late double _currentValue = 50;
   @override
   void initState() {
     super.initState();
@@ -66,7 +67,7 @@ class _NumberSelectorState extends State<NumberSelector> {
                   padding: const EdgeInsets.only(left: 8),
                   child: GestureDetector(
                     onTap: () {
-                      widget.onIncrement();
+                      widget.onDecrease();
                       setState(() {
                         if (_currentValue > 0) {
                           _currentValue = _currentValue - 1;

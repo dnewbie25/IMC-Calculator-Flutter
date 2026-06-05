@@ -3,7 +3,9 @@ import 'package:imc_calculator/core/app_colors.dart';
 import 'package:imc_calculator/core/text_styles.dart';
 
 class GenderSelector extends StatefulWidget {
-  const GenderSelector({super.key});
+  final ValueChanged<String?> onChanged;
+
+  const GenderSelector({super.key, required this.onChanged});
 
   @override
   State<GenderSelector> createState() => _GenderSelectorState();
@@ -24,6 +26,7 @@ class _GenderSelectorState extends State<GenderSelector> {
               setState(() {
                 selectedGender = "HOMBRE";
               });
+              widget.onChanged(selectedGender);
             },
             child: Padding(
               padding: const EdgeInsets.only(
@@ -63,6 +66,7 @@ class _GenderSelectorState extends State<GenderSelector> {
               setState(() {
                 selectedGender = "MUJER";
               });
+              widget.onChanged(selectedGender);
             },
             child: Padding(
               padding: const EdgeInsets.only(
