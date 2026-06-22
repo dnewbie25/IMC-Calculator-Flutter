@@ -3,6 +3,7 @@ import 'package:imc_calculator/components/gender_selector.dart';
 import 'package:imc_calculator/components/height_selector.dart';
 import 'package:imc_calculator/components/number_selector.dart';
 import 'package:imc_calculator/core/app_colors.dart';
+import 'package:imc_calculator/screens/imc_result_screen.dart';
 
 class ImcHomeScreen extends StatefulWidget {
   const ImcHomeScreen({super.key});
@@ -21,14 +22,14 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
     return Column(
       children: [
         GenderSelector(
-          onChanged: (value){
+          onChanged: (value) {
             setState(() {
               gender = value;
             });
           },
         ),
         HeightSelector(
-          onChanged: (value){
+          onChanged: (value) {
             setState(() {
               altura = value;
             });
@@ -70,7 +71,7 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
                       setState(() {
                         selectedAge--;
                       });
-                    }
+                    },
                   ),
                 ),
               ],
@@ -87,18 +88,25 @@ class _ImcHomeScreenState extends State<ImcHomeScreen> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  print("$altura, $gender, $selectedAge, $selectedWeight");
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context)=>
+                      ImcResultScreen(height: altura!.toDouble(), weight: selectedWeight.toDouble())
+                    ),
+                  );
                 },
                 style: ButtonStyle(
                   backgroundColor: WidgetStateProperty.all(AppColors.primary),
-                  shape: WidgetStateProperty.all(RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)
-                  ))
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
                 ),
                 child: Text(
                   "Calcular",
                   style: TextStyle(color: Colors.white, fontSize: 24),
-                )
+                ),
               ),
             ),
           ),
